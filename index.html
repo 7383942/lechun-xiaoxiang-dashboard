@@ -205,13 +205,13 @@
     .rows { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
     .row {
       display: grid;
-      grid-template-columns: 78px 1fr 54px;
+      grid-template-columns: 78px 1fr 88px;
       gap: 8px;
       align-items: center;
       font-size: 12px;
     }
     .row .name { color: #4D4842; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .row .val { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+    .row .val { text-align: left; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; white-space: nowrap; }
     .bar { height: 6px; background: #F1EBE1; border-radius: 99px; overflow: hidden; }
     .bar > span { display: block; height: 100%; border-radius: 99px; width: 0; transition: width .45s ease; }
     .eng {
