@@ -465,8 +465,6 @@
       const ov = DATA.overview[ovState.month];
       const prev = ovState.month === "TTL" ? null : prevMonth(ovState.month);
       const prevOv = prev ? DATA.overview[prev] : null;
-      const mixProducts = PRODUCTS.filter(p => p !== "朗姆红提希腊酸奶");
-
       const metrics = [
         {
           label: "发布笔记量",
@@ -477,11 +475,11 @@
           total: ov.notes.total
         },
         {
-          label: "站内曝光",
+          label: "站内总曝光",
           value: ov.impressions.total,
           prev: prevOv ? prevOv.impressions.total : null,
           unit: "",
-          breakdown: mixProducts.map(p => ({ name: p, value: ov.impressions[p] })),
+          breakdown: PRODUCTS.map(p => ({ name: p, value: ov.impressions[p] })),
           total: ov.impressions.total
         },
         {
@@ -489,7 +487,7 @@
           value: ov.reads.total,
           prev: prevOv ? prevOv.reads.total : null,
           unit: "",
-          breakdown: mixProducts.map(p => ({ name: p, value: ov.reads[p] })),
+          breakdown: PRODUCTS.map(p => ({ name: p, value: ov.reads[p] })),
           total: ov.reads.total
         }
       ];
