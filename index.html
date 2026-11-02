@@ -284,6 +284,11 @@
     }
     tbody tr.ttl-row:hover { background: #EFE8DB; }
     tbody tr.ttl-row td { border-bottom: 1px solid #E4DCCE; }
+    tbody tr.note-row.hot td {
+      border-bottom: 2px solid #C48A12;
+      padding-bottom: 10px;
+    }
+    tbody tr.note-row.hot:hover td { border-bottom-color: #A9750C; }
     .tag {
       display: inline-flex;
       align-items: center;
@@ -366,7 +371,7 @@
               <span class="dot"></span>
               <h2>笔记明细</h2>
             </div>
-            <p>按月份、产品筛选，点击表头可排序</p>
+            <p>按月份、产品筛选，点击表头可排序 · 互动合计 ≥ 2000 的笔记下方有金色标记线</p>
           </div>
         </div>
         <div class="toolbar">
@@ -411,6 +416,7 @@
       "小象PB干噎酸奶": "PB干噎",
       "朗姆红提希腊酸奶": "朗姆红提"
     };
+    const HOT_ENGAGEMENT = 2000;
 
     const ovState = { month: "TTL" };
     const ntState = { month: "全部", product: "全部", sortKey: "date", sortDir: "desc" };
@@ -592,7 +598,9 @@
         tbody.innerHTML = ttlRow + `<tr><td colspan="10"><div class="empty">这个筛选条件下没有笔记</div></td></tr>`;
         return;
       }
-      tbody.innerHTML = ttlRow + rows.map(n => `<tr>
+      tbody.innerHTML = ttlRow + rows.map(n => {
+        const hot = (n.engagement || 0) >= HOT_ENGAGEMENT ? " hot" : "";
+        return `<tr class="note-row${hot}">
         <td><span class="tag"><i style="background:${COLORS[n.product]}"></i>${n.product}</span></td>
         <td>${n.date}</td>
         <td>${n.blogger}</td>
@@ -603,7 +611,8 @@
         <td class="num">${fmtInt(n.collects)}</td>
         <td class="num">${fmtInt(n.comments)}</td>
         <td class="num">${fmtInt(n.engagement)}</td>
-      </tr>`).join("");
+      </tr>`;
+      }).join("");
     }
 
     document.querySelectorAll("th[data-key]").forEach(th => {
