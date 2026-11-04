@@ -284,19 +284,12 @@
     }
     tbody tr.ttl-row:hover { background: #EFE8DB; }
     tbody tr.ttl-row td { border-bottom: 1px solid #E4DCCE; }
-    .hot-badge {
+    .hot-icon {
       display: inline-block;
-      margin-left: 6px;
-      padding: 1px 7px;
-      border-radius: 999px;
-      background: #F6E3B8;
-      border: 1px solid #E7CF95;
-      color: #8A5A00;
-      font-size: 11px;
-      font-weight: 600;
-      line-height: 1.5;
-      vertical-align: 1px;
-      white-space: nowrap;
+      margin-left: 4px;
+      font-size: 12px;
+      line-height: 1;
+      vertical-align: -1px;
     }
     .tag {
       display: inline-flex;
@@ -380,7 +373,7 @@
               <span class="dot"></span>
               <h2>笔记明细</h2>
             </div>
-            <p>按月份、产品筛选，点击表头可排序 · 互动合计 ≥ 2000 的笔记在博主名旁有「高互动」标识</p>
+            <p>按月份、产品筛选，点击表头可排序 · 互动合计 ≥ 2000 的笔记在博主名旁有火焰标识 🔥</p>
           </div>
         </div>
         <div class="toolbar">
@@ -609,7 +602,9 @@
       }
       tbody.innerHTML = ttlRow + rows.map(n => {
         const hot = (n.engagement || 0) >= HOT_ENGAGEMENT;
-        const badge = hot ? ' <span class="hot-badge">高互动</span>' : "";
+        const badge = hot
+          ? ' <span class="hot-icon" role="img" aria-label="互动合计≥2000" title="互动合计 ≥ 2000">🔥</span>'
+          : "";
         return `<tr class="note-row">
         <td><span class="tag"><i style="background:${COLORS[n.product]}"></i>${n.product}</span></td>
         <td>${n.date}</td>
